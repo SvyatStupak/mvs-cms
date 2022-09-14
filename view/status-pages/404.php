@@ -29,13 +29,7 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/index.php">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/about-us.php">About Us <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/contact-us.php">Contact Us <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
@@ -62,23 +56,7 @@
     <main role="main" class="container">
 
       <div class="starter-template">
-        <h1>Conatct Us Page</h1>
-            <form action="index.php" method="POST">
-              <input type="hidden" name="section" value="contact">
-              <input type="hidden" name="action" value="submit">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Comment</label>
-                <!-- <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> -->
-                <textarea name="comment" class="form-control" id="exampleInputPassword1" cols="30" rows="10"></textarea>
-              </div>
-              <div class="form-check">
-              </div>
-              <button type="submit" class="btn btn-primary">Send</button>
-            </form>
+        <h1>Page not found</h1>
       </div>
 
     </main><!-- /.container -->
@@ -92,4 +70,3 @@
     <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
   </body>
 </html>
-
