@@ -2,11 +2,14 @@
 
 class ContactController extends Controller
 {
-    function runBeforeAction() {
-        echo 'runBeforeAction <br>';
-        if($_SESSION['has_submitted_the_form'] ?? 0 == 1) 
-        {
-            include 'view/contact/contact-us-already-contacted.php';
+    function runBeforeAction()
+    {
+        if ($_SESSION['has_submitted_the_form'] ?? 0 == 1) {
+            $variebles['title'] = 'You already contacted';
+            $variebles['content'] = 'See you soon';
+
+            $template = new Template('default');
+            $template->view('static-page', $variebles);
             return false;
         }
         return true;
@@ -14,21 +17,22 @@ class ContactController extends Controller
 
     function defaultAction()
     {
-        echo 'defaultAction <br>';
-        include 'view/contact/contact-us.php';
+        $variebles['title'] = 'Contact Us Page';
+        $variebles['content'] = 'We wait you opinion';
+
+        $template = new Template('default');
+        $template->view('contact/contact-us', $variebles);
     }
 
     function submitAction()
     {
-        echo 'submitAction <br>';
         $_SESSION['has_submitted_the_form'] = 1;
 
-        include 'view/contact/contact-us-thank-you.php';
+        $variebles['title'] = 'Thank you for contact';
+        $variebles['content'] = 'See you soon';
+
+        $template = new Template('default');
+        $template->view('static-page', $variebles);
+
     }
-
-    
 }
-
-
-
-

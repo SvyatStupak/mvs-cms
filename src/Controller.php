@@ -4,7 +4,6 @@ class Controller
 {
     function runAction($actionName)
     {
-        echo 'runAction <br>';
         if (method_exists($this, 'runBeforeAction')) {
             $result = $this->runBeforeAction();
             if($result == false) {
