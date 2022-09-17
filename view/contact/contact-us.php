@@ -1,6 +1,6 @@
 <div class="starter-template">
-  <h1><?= $title ?></h1>
-  <p><?= $content ?></p>
+  <h1><?= $pageObj->title ?></h1>
+  <p><?= $pageObj->content ?></p>
   <form action="index.php" method="POST">
     <input type="hidden" name="section" value="contact">
     <input type="hidden" name="action" value="submit">

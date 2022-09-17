@@ -6,6 +6,12 @@ define('VIEW_PATH', ROOT_PATH . 'view' . DIRECTORY_SEPARATOR);
 
 include_once ROOT_PATH . 'src/Controller.php';
 include_once ROOT_PATH . 'src/Template.php';
+include_once ROOT_PATH . 'src/DataBaseConnection.php';
+include_once ROOT_PATH . 'model/Page.php';
+
+DataBaseConnection::connect('localhost', 'my_cms', 'root', 'root');
+
+
 
 $section = $_GET['section'] ?? $_POST['section'] ?? 'home';
 $action = $_GET['action'] ?? $_POST['action'] ?? 'default';
