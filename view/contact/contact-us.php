@@ -15,6 +15,6 @@
     </div>
     <div class="form-check">
     </div>
-    <button type="submit" class="btn btn-primary">Send</button>
+    <button type="submit" name='submit' class="btn btn-primary">Send</button>
   </form>
 </div>
