@@ -28,7 +28,7 @@
     <main role="main" class="container">
 
         <?php
-            include VIEW_PATH . $template . '.php';
+            include MODULES_PATH . $template . '.php';
         ?>
 
     </main><!-- /.container -->

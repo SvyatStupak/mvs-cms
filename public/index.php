@@ -1,15 +1,16 @@
 <?php
 session_start();
 
-define('ROOT_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
+define('ROOT_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
 define('VIEW_PATH', ROOT_PATH . 'view' . DIRECTORY_SEPARATOR);
+define('MODULES_PATH', ROOT_PATH . 'modules' . DIRECTORY_SEPARATOR);
 
 include_once ROOT_PATH . 'src/Controller.php';
 include_once ROOT_PATH . 'src/Template.php';
 include_once ROOT_PATH . 'src/DataBaseConnection.php';
 include_once ROOT_PATH . 'src/Entity.php';
 include_once ROOT_PATH . 'src/Router.php';
-include_once ROOT_PATH . 'model/Page.php';
+include_once MODULES_PATH . 'page/models/Page.php';
 
 DataBaseConnection::connect('localhost', 'my_cms', 'root', 'root');
 
@@ -27,13 +28,14 @@ $router->findBy('pretty_url', $action);
 
 $action = $router->action != '' ? $router->action : 'default';
 
-$moduleName = ucfirst($router->module) . 'Controller';
+$controllerName = ucfirst($router->module) . 'Controller';
 
+$controllerFile = MODULES_PATH . $router->module . '/controllers/' . $controllerName . '.php';
 
-if (file_exists(ROOT_PATH . 'controller/' . $moduleName . '.php')) {
-    include 'controller/' . $moduleName . '.php';
+if (file_exists($controllerFile)) {
+    include $controllerFile;
 
-    $controller = new $moduleName();
+    $controller = new $controllerName();
     $controller->setEntityId($router->entity_id);
     $controller->runAction($action);
 }

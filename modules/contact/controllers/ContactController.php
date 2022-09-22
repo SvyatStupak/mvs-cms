@@ -15,7 +15,7 @@ class ContactController extends Controller
             $variebles['pageObj'] = $pageObj;
 
             $template = new Template('default');
-            $template->view('static-page', $variebles);
+            $template->view('page/views/static-page', $variebles);
             return false;
         }
         return true;
@@ -33,7 +33,7 @@ class ContactController extends Controller
         $variebles['pageObj'] = $pageObj;
 
         $template = new Template('default');
-        $template->view('contact/contact-us', $variebles);
+        $template->view('contact/views/contact-us', $variebles);
     }
 
     public function submitAction()
@@ -51,6 +51,6 @@ class ContactController extends Controller
 
 
         $template = new Template('default');
-        $template->view('static-page', $variebles);
+        $template->view('page/views/static-page', $variebles);
     }
 }
