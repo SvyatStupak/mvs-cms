@@ -16,7 +16,7 @@ DataBaseConnection::connect('localhost', 'my_cms', 'root', 'root');
 // $section = $_GET['section'] ?? $_POST['section'] ?? 'home';
 // $action = $_GET['action'] ?? $_POST['action'] ?? 'default';
 
-$action = $_GET['seo_name'] ?? 'home';
+$action = $_GET['seo_name'] ?? $_POST['seo_name'] ?? 'home';
 
 $dbh = DataBaseConnection::getInstance();
 $dbc = $dbh->getConnection();
@@ -28,6 +28,7 @@ $router->findBy('pretty_url', $action);
 $action = $router->action != '' ? $router->action : 'default';
 
 $moduleName = ucfirst($router->module) . 'Controller';
+
 
 if (file_exists(ROOT_PATH . 'controller/' . $moduleName . '.php')) {
     include 'controller/' . $moduleName . '.php';

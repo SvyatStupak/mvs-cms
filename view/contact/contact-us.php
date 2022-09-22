@@ -2,8 +2,8 @@
   <h1><?= $pageObj->title ?></h1>
   <p><?= $pageObj->content ?></p>
   <form action="index.php" method="POST">
-    <input type="hidden" name="section" value="contact">
-    <input type="hidden" name="action" value="submit">
+    <input type="hidden" name="seo_name" value="thank_you_for_contacted">
+    <!-- <input type="hidden" name="action" value="submit"> -->
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
       <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">

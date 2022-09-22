@@ -2,7 +2,7 @@
 
 class ContactController extends Controller
 {
-    function runBeforeAction()
+    public function runBeforeAction()
     {
         if ($_SESSION['has_submitted_the_form'] ?? 0 == 1) {
 
@@ -10,7 +10,7 @@ class ContactController extends Controller
             $dbc = $dbh->getConnection();
 
             $pageObj = new Page($dbc);
-            $pageObj->findBy('id', $this->entityId);
+            $pageObj->findBy('id', 3);
 
             $variebles['pageObj'] = $pageObj;
 
@@ -21,7 +21,7 @@ class ContactController extends Controller
         return true;
     }
 
-    function defaultAction()
+    public function defaultAction()
     {
 
         $dbh = DataBaseConnection::getInstance();
@@ -36,7 +36,7 @@ class ContactController extends Controller
         $template->view('contact/contact-us', $variebles);
     }
 
-    function submitAction()
+    public function submitAction()
     {
         $_SESSION['has_submitted_the_form'] = 1;
 

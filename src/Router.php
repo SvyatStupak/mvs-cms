@@ -2,8 +2,6 @@
 
 class Router extends Entity
 {
-    
-
     public function __construct($dbc)
     {
         $this->dbc = $dbc;
