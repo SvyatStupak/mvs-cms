@@ -12,6 +12,11 @@ include_once ROOT_PATH . 'src/DataBaseConnection.php';
 include_once ROOT_PATH . 'src/Entity.php';
 include_once ROOT_PATH . 'src/Router.php';
 include_once ROOT_PATH . 'src/Auth.php';
+include_once ROOT_PATH . 'src/Validation.php';
+include_once ROOT_PATH . 'src/validationRules/ValidateEmeil.php';
+include_once ROOT_PATH . 'src/validationRules/ValidateMaximum.php';
+include_once ROOT_PATH . 'src/validationRules/ValidateMinimum.php';
+include_once ROOT_PATH . 'src/validationRules/ValidateSpecialCharacter.php';
 include_once MODULES_PATH . 'page/models/Page.php';
 include_once MODULES_PATH . 'user/models/User.php';
 

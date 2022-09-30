@@ -10,7 +10,9 @@ include_once ROOT_PATH . 'src/Template.php';
 include_once ROOT_PATH . 'src/DataBaseConnection.php';
 include_once ROOT_PATH . 'src/Entity.php';
 include_once ROOT_PATH . 'src/Router.php';
+include_once ROOT_PATH . 'src/Validation.php';
 include_once MODULES_PATH . 'page/models/Page.php';
+include_once MODULES_PATH . 'user/models/User.php';
 
 DataBaseConnection::connect('localhost', 'my_cms', 'root', 'root');
 
