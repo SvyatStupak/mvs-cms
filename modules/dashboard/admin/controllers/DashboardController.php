@@ -37,11 +37,11 @@ class DashboardController extends Controller
                 ->addRule(new ValidateMinimum(3))
                 ->addRule(new ValidateMaximum(20))
                 ->addRule(new ValidateSpecialCharacter())
+                ->addRule(new ValidateNoEmptySpaces())
                 ->validate($password)
             )
             {
-                $_SESSION['validationRules']['error'] = "Password must be beetwen 3 and 20 characters 
-                                                         and must be contain one special character";
+                $_SESSION['validationRules']['errors'] = $validation->getAllErrors();
             }
 
             if (!$validation
@@ -51,12 +51,12 @@ class DashboardController extends Controller
                 ->validate($username)
             )
             {
-                $_SESSION['validationRules']['error'] = "Username is not valid email";
+                $_SESSION['validationRules']['errors'] = $validation->getAllErrors();
             }
 
             $auth = new Auth();
             
-            if (($_SESSION['validationRules']['error'] ?? '') == '') 
+            if (empty($_SESSION['validationRules']['errors'])) 
             {
                 if ($auth->checkLogin($username, $password)) {
                     $_SESSION['is_admin'] = 1;
@@ -64,13 +64,13 @@ class DashboardController extends Controller
                     exit();
                 } 
 
-                $_SESSION['validationRules']['error'] = 'Username or password is incorect';
+                $_SESSION['validationRules']['errors'] = ['Username or password is incorect'];
                 
             }
         }
 
         include VIEW_PATH . 'admin/login.php';
-        unset($_SESSION['validationRules']['error']);
+        unset($_SESSION['validationRules']['errors']);
     }
     
 }

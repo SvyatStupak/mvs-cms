@@ -1,6 +1,6 @@
 <?php
 
-class ValidateSpecialCharacter
+class ValidateSpecialCharacter implements ValidationRulesInterface
 {
     private $rules;
 
@@ -9,7 +9,7 @@ class ValidateSpecialCharacter
         $this->rules = $rules;
     }
 
-    public function validateRule($value)
+    public function validateRule(string $value): bool
     {
         if (!preg_match($this->rules, $value)) 
         {
@@ -17,5 +17,10 @@ class ValidateSpecialCharacter
         }
 
         return true;
+    }
+
+    public function getErrorMessage(): string
+    {
+        return 'You need special character';
     }
 }

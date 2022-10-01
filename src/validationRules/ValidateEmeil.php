@@ -1,9 +1,9 @@
 <?php
 
-class ValidateEmail
+class ValidateEmail implements ValidationRulesInterface
 {
 
-    public function validateRule($value)
+    public function validateRule(string $value): bool
     {
         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) 
         {
@@ -11,5 +11,10 @@ class ValidateEmail
         }
 
         return true;
+    }
+
+    public function getErrorMessage(): string
+    {
+        return 'Email is not valid.';
     }
 }

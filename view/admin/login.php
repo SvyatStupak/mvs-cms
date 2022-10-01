@@ -34,7 +34,11 @@
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required
             value="<?= $_POST['password'] ?? ''?>">
         <div class="text-danger">
-            <?= $_SESSION['validationRules']['error'] ?? '' ?>
+            
+            <?php foreach ($_SESSION['validationRules']['errors'] ?? array() as $error) { ?>
+                 <?= $error ?> 
+                 <br>
+            <?php } ?>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2017-2022</p>

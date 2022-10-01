@@ -1,6 +1,6 @@
 <?php
 
-class ValidateMaximum
+class ValidateMaximum implements ValidationRulesInterface
 {
     private $maximum;
 
@@ -9,7 +9,7 @@ class ValidateMaximum
         $this->maximum = $maximum;
     }
 
-    public function validateRule($value)
+    public function validateRule(string $value): bool
     {
         if (strlen($value) > $this->maximum) 
         {
@@ -17,5 +17,10 @@ class ValidateMaximum
         }
 
         return true;
+    }
+
+    public function getErrorMessage(): string
+    {
+        return "You need less $this->maximum character";
     }
 }

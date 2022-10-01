@@ -3,8 +3,10 @@
 class Validation
 {
     private $rules;
+    private $errors = [];
 
-    public function addRule($rule)
+
+    public function addRule(ValidationRulesInterface $rule)
     {
         $this->rules[] = $rule;
         return $this;
@@ -16,16 +18,21 @@ class Validation
             $ruleValidation = $rule->validateRule($value);
             if (!$ruleValidation) 
             {
+                $this->errors[] = $rule->getErrorMessage();
                 $this->rules = [];
                 return false;
             }
         }
+        $this->errors = [];
         $this->rules = [];
         return true;
     }
 
-    // public function clearRules()
-    // {
-    //     $this->rules = [];
-    // }
+    public function getAllErrors()
+    {
+        return $this->errors;
+    }
+    
+
+
 }

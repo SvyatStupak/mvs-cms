@@ -1,6 +1,6 @@
 <?php
 
-class ValidateMinimum
+class ValidateMinimum implements ValidationRulesInterface
 {
     private $minimum;
 
@@ -9,7 +9,7 @@ class ValidateMinimum
         $this->minimum = $minimum;
     }
 
-    public function validateRule($value)
+    public function validateRule(string $value): bool
     {
         if (strlen($value) < $this->minimum) 
         {
@@ -17,5 +17,10 @@ class ValidateMinimum
         }
 
         return true;
+    }
+    
+    public function getErrorMessage(): string
+    {
+        return "You need more $this->minimum character";
     }
 }
