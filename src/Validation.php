@@ -16,9 +16,16 @@ class Validation
             $ruleValidation = $rule->validateRule($value);
             if (!$ruleValidation) 
             {
+                $this->rules = [];
                 return false;
             }
         }
+        $this->rules = [];
         return true;
     }
+
+    // public function clearRules()
+    // {
+    //     $this->rules = [];
+    // }
 }

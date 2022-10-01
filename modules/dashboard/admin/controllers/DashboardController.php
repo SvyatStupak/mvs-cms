@@ -32,19 +32,6 @@ class DashboardController extends Controller
             $password = $_POST['password'] ?? '';
 
             $validation = new Validation();
-            
-            // if (!$validation->validatePassword($password)) 
-            // {
-            //     $_SESSION['validationRules']['error'] = "Password must be beetwen 3 and 20 characters 
-            //                                             and must be contain one special character";
-                
-            // }
-
-            // if (!$validation->validateUsername($username)) 
-            // {
-            //     $_SESSION['validationRules']['error'] = "Username is not valid email";
-                
-            // }
 
             if (!$validation
                 ->addRule(new ValidateMinimum(3))
