@@ -13,8 +13,7 @@ class PageController extends Controller
 
         $variables['pageObj'] = $pageObj;
 
-        $template = new Template('default');
-        $template->view('page/views/static-page', $variables);
+        $this->template->view('page/views/static-page', $variables);
 
     }
 }

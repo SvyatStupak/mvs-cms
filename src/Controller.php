@@ -2,7 +2,7 @@
 
 class Controller 
 {
-
+    public $template;
     protected $entityId;
     
     public function runAction($actionName)

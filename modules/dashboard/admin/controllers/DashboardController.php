@@ -21,7 +21,7 @@ class DashboardController extends Controller
 
     public function defaultAction()
     {
-        echo 'Welcome to admin dashboard';
+        header("Location: /admin/index.php?module=page");
     }
 
     public function loginAction()
@@ -36,8 +36,8 @@ class DashboardController extends Controller
             if (!$validation
                 ->addRule(new ValidateMinimum(3))
                 ->addRule(new ValidateMaximum(20))
-                ->addRule(new ValidateSpecialCharacter())
-                ->addRule(new ValidateNoEmptySpaces())
+                // ->addRule(new ValidateSpecialCharacter())
+                // ->addRule(new ValidateNoEmptySpaces())
                 ->validate($password)
             )
             {
@@ -47,7 +47,7 @@ class DashboardController extends Controller
             if (!$validation
                 ->addRule(new ValidateMinimum(3))
                 ->addRule(new ValidateMaximum(20))
-                ->addRule(new ValidateEmail())
+                // ->addRule(new ValidateEmail())
                 ->validate($username)
             )
             {

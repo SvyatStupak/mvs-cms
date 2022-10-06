@@ -34,8 +34,15 @@ if ($module == 'dashboard') {
     
     include MODULES_PATH . 'dashboard/admin/controllers/DashboardController.php';
     
-    $aboutController = new DashboardController();
-    $aboutController->runAction($action);
+    $dashboardController = new DashboardController();
+    $dashboardController->template = new Template('admin/layout/default');
+    $dashboardController->runAction($action);
     
-} 
+} elseif ($module = 'page') {
+    include MODULES_PATH . 'page/admin/controllers/PageController.php';
+    
+    $pageController = new PageController();
+    $pageController->template = new Template('admin/layout/default');
+    $pageController->runAction($action); 
+}
 
