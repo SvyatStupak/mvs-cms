@@ -16,23 +16,67 @@ abstract class Entity
         $this->initFields();
     }
 
-    public function findBy($fieldName, $fieldValue)
+    public function findAll()
     {
-        $sql = "SELECT * FROM $this->tableName WHERE $fieldName=:value";
-        $stmt = $this->dbc->prepare($sql);
-        $stmt->execute(['value' => $fieldValue]); 
-        $databaseData = $stmt->fetch();
+        $results = [];
+        $databaseData = $this->find();
 
         if ($databaseData) {
-            $this->setValue($databaseData);
+            $className = static::class;
+            foreach ($databaseData as $objectData) 
+            {
+                $object = new $className($this->dbc);
+                $this->setValue($object, $objectData);
+                $results[] = $object;
+            }
         }
+        return $results;
 
+        
     }
 
-    public function setValue($values)
+    public function find($fieldName = '', $fieldValue = '')
     {
-        foreach ($this->fields as $fieldName) {
-           $this->$fieldName = $values[$fieldName];
+        $preparedFields = [];
+        $sql = "SELECT * FROM $this->tableName";
+        if ($fieldName) {
+            $sql .= "WHERE $fieldName=:value";
+            $preparedFields = ['value' => $fieldValue];
         }
+        $stmt = $this->dbc->prepare($sql);
+        $stmt->execute($preparedFields); 
+        $databaseData = $stmt->fetchAll();
+        
+        return $databaseData;
+
+        
+    }
+    public function findBy($fieldName, $fieldValue)
+    {
+        // $sql = "SELECT * FROM $this->tableName WHERE $fieldName=:value";
+        // $stmt = $this->dbc->prepare($sql);
+        // $stmt->execute(['value' => $fieldValue]); 
+        // $databaseData = $stmt->fetch();
+        
+        // if ($databaseData) {
+            
+        //     $this->setValue($this, $databaseData);
+            
+        // }
+
+        $result = $this->find($fieldName, $fieldValue);
+        if ($result && $result[0]) 
+        {
+            $this->setValue($this, $result[0]);
+        }
+    }
+
+    public function setValue($object, $values)
+    {
+        foreach ($object->fields as $fieldName) {
+            $object->$fieldName = $values[$fieldName];
+        }
+
+        return $object;
     }
 }

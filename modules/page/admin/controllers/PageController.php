@@ -21,7 +21,13 @@ class PageController extends Controller
 
     public function defaultAction()
     {
-        $variables = [];
+        $dbh = DataBaseConnection::getInstance();
+        $dbc = $dbh->getConnection();
+
+        $pageHandler = new Page($dbc);
+        $pages = $pageHandler->findAll();
+
+        $variables['pages'] = $pages;
         $this->template->view('page/admin/views/page-list', $variables);
     }
 }
