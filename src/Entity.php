@@ -1,5 +1,7 @@
 <?php
 
+namespace src;
+
 abstract class Entity
 {
     protected $dbc;
@@ -35,12 +37,21 @@ abstract class Entity
         
     }
 
+    public function findBy($fieldName, $fieldValue)
+    {
+        $result = $this->find($fieldName, $fieldValue);
+        if ($result && $result[0]) 
+        {
+            $this->setValue($this, $result[0]);
+        }
+    }
+    
     public function find($fieldName = '', $fieldValue = '')
     {
         $preparedFields = [];
         $sql = "SELECT * FROM $this->tableName";
         if ($fieldName) {
-            $sql .= "WHERE $fieldName=:value";
+            $sql .= " WHERE $fieldName=:value";
             $preparedFields = ['value' => $fieldValue];
         }
         $stmt = $this->dbc->prepare($sql);
@@ -50,25 +61,6 @@ abstract class Entity
         return $databaseData;
 
         
-    }
-    public function findBy($fieldName, $fieldValue)
-    {
-        // $sql = "SELECT * FROM $this->tableName WHERE $fieldName=:value";
-        // $stmt = $this->dbc->prepare($sql);
-        // $stmt->execute(['value' => $fieldValue]); 
-        // $databaseData = $stmt->fetch();
-        
-        // if ($databaseData) {
-            
-        //     $this->setValue($this, $databaseData);
-            
-        // }
-
-        $result = $this->find($fieldName, $fieldValue);
-        if ($result && $result[0]) 
-        {
-            $this->setValue($this, $result[0]);
-        }
     }
 
     public function setValue($object, $values)

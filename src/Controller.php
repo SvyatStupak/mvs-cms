@@ -1,8 +1,11 @@
 <?php
 
+namespace src;
+
 class Controller 
 {
     public $template;
+    public $dbc;
     protected $entityId;
     
     public function runAction($actionName)

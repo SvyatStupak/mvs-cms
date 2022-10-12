@@ -1,5 +1,10 @@
 <?php
 
+namespace modules\page\admin\controllers;
+
+use src\Controller;
+use modules\page\models\Page;
+
 class PageController extends Controller
 {
     public function runBeforeAction()
@@ -21,14 +26,30 @@ class PageController extends Controller
 
     public function defaultAction()
     {
-        $dbh = DataBaseConnection::getInstance();
-        $dbc = $dbh->getConnection();
+        $variables = [];
 
-        $pageHandler = new Page($dbc);
+        $pageHandler = new Page($this->dbc);
         $pages = $pageHandler->findAll();
 
         $variables['pages'] = $pages;
         $this->template->view('page/admin/views/page-list', $variables);
+    }
+
+    public function editPageAction()
+    {
+        $pageId = $_GET['id'];
+        $variables = [];
+
+        if ($_POST['action'] ?? false) 
+        {
+            var_dump($_POST);
+        }
+
+        $page = new Page($this->dbc);
+        $page->findBy('id', $pageId);
+
+        $variables['page'] = $page;
+        $this->template->view('page/admin/views/page-edit', $variables);
     }
 }
 

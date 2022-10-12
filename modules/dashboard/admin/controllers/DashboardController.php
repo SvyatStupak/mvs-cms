@@ -1,5 +1,14 @@
 <?php
 
+namespace modules\dashboard\admin\controllers;
+
+use src\Controller;
+use src\Auth;
+
+use src\Validation;
+use src\validationRules\ValidateMinimum;
+use src\validationRules\ValidateMaximum;
+
 class DashboardController extends Controller
 {
     public function runBeforeAction()

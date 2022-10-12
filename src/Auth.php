@@ -1,5 +1,10 @@
 <?php
 
+namespace src;
+
+use src\DataBaseConnection;
+use modules\user\models\User;
+
 class Auth 
 {
     public function checkLogin($username, $password)

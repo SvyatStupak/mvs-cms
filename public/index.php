@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+use src\DataBaseConnection;
+use src\Router;
+use modules\page\controllers\PageController;
+use src\Template;
+
+
 define('ROOT_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
 define('VIEW_PATH', ROOT_PATH . 'view' . DIRECTORY_SEPARATOR);
 define('MODULES_PATH', ROOT_PATH . 'modules' . DIRECTORY_SEPARATOR);
@@ -16,8 +22,6 @@ include_once MODULES_PATH . 'user/models/User.php';
 
 DataBaseConnection::connect('localhost', 'my_cms', 'root', 'root');
 
-// $section = $_GET['section'] ?? $_POST['section'] ?? 'home';
-// $action = $_GET['action'] ?? $_POST['action'] ?? 'default';
 
 $action = $_GET['seo_name'] ?? $_POST['seo_name'] ?? 'home';
 
@@ -35,9 +39,9 @@ $controllerName = ucfirst($router->module) . 'Controller';
 $controllerFile = MODULES_PATH . $router->module . '/controllers/' . $controllerName . '.php';
 
 if (file_exists($controllerFile)) {
-    include $controllerFile;
 
     $controller = new $controllerName();
+    $controller->dbc = $dbc;
     $controller->template = new Template('layout/default');
     $controller->setEntityId($router->entity_id);
     $controller->runAction($action);

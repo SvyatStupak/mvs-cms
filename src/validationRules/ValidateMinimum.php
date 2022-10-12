@@ -1,5 +1,9 @@
 <?php
 
+namespace src\validationRules;
+
+use src\interfaces\ValidationRulesInterface;
+
 class ValidateMinimum implements ValidationRulesInterface
 {
     private $minimum;

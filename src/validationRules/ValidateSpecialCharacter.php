@@ -1,5 +1,9 @@
 <?php
 
+namespace src\validationRules;
+
+use src\interfaces\ValidationRulesInterface;
+
 class ValidateSpecialCharacter implements ValidationRulesInterface
 {
     private $rules;

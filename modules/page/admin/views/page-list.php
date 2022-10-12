@@ -50,35 +50,35 @@
             </thead>
             <tbody>
               <?php foreach ($pages as $page) { ?>
-              <tr>
-                <td>
-                  # <?= $page->id ?> 
-                </td>
-                <td>
-                  <a>
-                    <?= $page->title ?>
-                  </a>
-                </td>
-                
-                <td class="project-actions text-right">
-                  <a class="btn btn-primary btn-sm" href="#">
-                    <i class="fas fa-folder">
-                    </i>
-                    View
-                  </a>
-                  <a class="btn btn-info btn-sm" href="#">
-                    <i class="fas fa-pencil-alt">
-                    </i>
-                    Edit
-                  </a>
-                  <a class="btn btn-danger btn-sm" href="#">
-                    <i class="fas fa-trash">
-                    </i>
-                    Delete
-                  </a>
-                </td>
-              </tr>
-                <?php } ?>
+                <tr>
+                  <td>
+                    # <?= $page->id ?>
+                  </td>
+                  <td>
+                    <a>
+                      <?= $page->title ?>
+                    </a>
+                  </td>
+
+                  <td class="project-actions text-right">
+                    <a class="btn btn-primary btn-sm" href="#">
+                      <i class="fas fa-folder">
+                      </i>
+                      View
+                    </a>
+                    <a class="btn btn-info btn-sm" href="/admin/index.php?module=page&amp;action=editPage&amp;id=<?= $page->id ?>">
+                      <i class="fas fa-pencil-alt">
+                      </i>
+                      Edit
+                    </a>
+                    <a class="btn btn-danger btn-sm" href="#">
+                      <i class="fas fa-trash">
+                      </i>
+                      Delete
+                    </a>
+                  </td>
+                </tr>
+              <?php } ?>
             </tbody>
           </table>
         </div>

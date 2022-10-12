@@ -224,16 +224,16 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Contact 
+                                    Contact
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="/admin/index.php?module=page" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Pages 
+                                    Pages
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -245,12 +245,13 @@
             <!-- /.sidebar -->
         </aside>
 
-
-
-        <?php
-            include MODULES_PATH . $template . '.php';
-        ?>
-
+        <div class="content-wrapper">
+            <section class="content">
+                <?php
+                include MODULES_PATH . $template . '.php';
+                ?>
+            </section>
+        </div>
 
         <footer class="main-footer">
             <strong>Copyright &copy; 2014-2022 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>

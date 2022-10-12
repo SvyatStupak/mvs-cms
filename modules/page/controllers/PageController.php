@@ -1,14 +1,15 @@
 <?php
 
+namespace modules\page\controllers;
+
+use src\Controller;
+use modules\page\models\Page;
+
 class PageController extends Controller
 {
     function defaultAction()
     {
-
-        $dbh = DataBaseConnection::getInstance();
-        $dbc = $dbh->getConnection();
-
-        $pageObj = new Page($dbc);
+        $pageObj = new Page($this->dbc);
         $pageObj->findBy('id', $this->entityId);
 
         $variables['pageObj'] = $pageObj;

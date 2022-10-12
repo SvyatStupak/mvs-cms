@@ -1,5 +1,7 @@
 <?php
 
+namespace src;
+
 class DataBaseConnection
 {
     static private $instance = null;
@@ -20,7 +22,7 @@ class DataBaseConnection
 
     static public function connect($host, $dbName, $user, $pass)
     {
-        self::$connection = new PDO("mysql:host=$host;dbname=$dbName", $user, $pass);
+        self::$connection = new \PDO("mysql:host=$host;dbname=$dbName", $user, $pass);
     }
 
     static public function getConnection()
