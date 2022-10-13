@@ -6,7 +6,9 @@ class Controller
 {
     public $template;
     public $dbc;
+    public $log;
     protected $entityId;
+
     
     public function runAction($actionName)
     {
@@ -22,7 +24,7 @@ class Controller
         {
             $this->$actionName();
         } else {
-            include 'view/status-pages/404.php';
+            include VIEW_PATH . 'status-pages/404.php';
         }
     }
 

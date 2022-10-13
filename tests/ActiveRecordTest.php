@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
+use modules\page\models\Page;
 
 require '/Applications/MAMP/htdocs/project/src/Entity.php';
 require '/Applications/MAMP/htdocs/project/modules/page/models/Page.php';
@@ -45,5 +46,27 @@ final class ActiveRecordTest extends TestCase
 
         $this->assertEquals(12, $page->id);
         
+    }
+
+    public function testSave(): void
+    {
+        $mockDatabase = $this->getMockBuilder(Observer::class)
+            ->enableProxyingToOriginalMethods()
+            ->getMock();
+
+        $mockDatabase->expects($this->exactly(2))
+             ->method('prepare')
+            ->with(
+                $this->logicalOr(
+                    $this->equalTo("SELECT FROM pages WHERE id = :id"),
+                    $this->equalTo("UPDATE pages SET title = :title, content = :content WHERE id = :id")
+                )
+            );
+
+        $page = new Page($mockDatabase);
+        $page->findBy('id', 2);
+
+        $page->title = 'New title';
+        $page->save();
     }
 }

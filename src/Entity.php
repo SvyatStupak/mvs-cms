@@ -8,6 +8,7 @@ abstract class Entity
 
     protected $tableName;
     protected $fields;
+    protected $primeryKeys = ['id'];
 
     abstract protected function initFields();
 
@@ -28,7 +29,7 @@ abstract class Entity
             foreach ($databaseData as $objectData) 
             {
                 $object = new $className($this->dbc);
-                $this->setValue($object, $objectData);
+                $this->setValue( $objectData, $object);
                 $results[] = $object;
             }
         }
@@ -42,7 +43,7 @@ abstract class Entity
         $result = $this->find($fieldName, $fieldValue);
         if ($result && $result[0]) 
         {
-            $this->setValue($this, $result[0]);
+            $this->setValue($result[0]);
         }
     }
     
@@ -63,10 +64,55 @@ abstract class Entity
         
     }
 
-    public function setValue($object, $values)
+    public function save()
     {
-        foreach ($object->fields as $fieldName) {
-            $object->$fieldName = $values[$fieldName];
+        // $sql = "UPDATE pages SET title=:title, content=:content WHERE id=:id";
+
+        $fieldBindings = [];
+        $keysBinding = [];
+        $preparedFields = [];
+
+        foreach ($this->fields as $fieldName) {
+            $fieldBindings[$fieldName] = $fieldName . '= :' . $fieldName;
+            $preparedFields[$fieldName] = $this->$fieldName;
+        }
+        
+        
+        foreach ($this->primeryKeys as $keyName) {
+            $keysBinding[$keyName] = $keyName . '= :' . $keyName;
+            $preparedFields[$keyName] = $this->$keyName;
+        }
+        
+        $fieldBindingsString = join(',', $fieldBindings);
+        $keysBindingString = join(',', $keysBinding);
+
+
+        $sql = "UPDATE $this->tableName SET $fieldBindingsString WHERE $keysBindingString";
+
+        $stmt = $this->dbc->prepare($sql);
+        $stmt->execute($preparedFields);
+    }
+
+    public function setValue($values, $object=null)
+    {
+        if ($object === null) 
+        {
+            $object = $this;
+        }
+        foreach ($object->fields as $fieldName) 
+        {
+            if (isset($values[$fieldName])) 
+            {
+                $object->$fieldName = $values[$fieldName];
+            }
+        }
+
+        foreach ($object->primeryKeys as $keyName) 
+        {
+            if (isset($values[$keyName])) 
+            {
+                $object->$keyName = $values[$keyName];
+            }
         }
 
         return $object;

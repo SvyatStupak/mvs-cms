@@ -2,6 +2,9 @@
 
 use PHPUnit\Framework\TestCase;
 
+use src\Validation;
+use src\validationRules\ValidateEmail;
+
 require_once 'src/interfaces/ValidationRulesInterface.php';
 require_once 'src/Validation.php';
 require_once 'src/validationRules/ValidateEmeil.php';

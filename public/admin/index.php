@@ -1,14 +1,14 @@
 <?php
 session_start();
 
+use Monolog\Level;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
 use src\DataBaseConnection;
 use src\Template;
 use modules\dashboard\admin\controllers\DashboardController;
-use modules\page\admin\controllers\PageController;
-
-
-
-
+use \modules\page\admin\controllers\PageController;
 
 define('ROOT_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
 define('VIEW_PATH', ROOT_PATH . 'view' . DIRECTORY_SEPARATOR);
@@ -23,6 +23,8 @@ spl_autoload_register(function ($class_name) {
     }
 });
 
+require '../../vendor/autoload.php';
+
 
 DataBaseConnection::connect('localhost', 'my_cms', 'root', 'root');
 
@@ -34,20 +36,22 @@ $action = $_GET['action'] ?? $_POST['action'] ?? 'default';
 
 
 if ($module == 'dashboard') {
-    
+
     // include MODULES_PATH . 'dashboard/admin/controllers/DashboardController.php';
-    
+
     $dashboardController = new DashboardController();
     $dashboardController->template = $dbc;
     $dashboardController->template = new Template('admin/layout/default');
     $dashboardController->runAction($action);
-    
 } elseif ($module = 'page') {
     // include MODULES_PATH . 'page/admin/controllers/PageController.php';
-    
+
+    $log = new Logger('name');
+    // $log->pushHandler(new StreamHandler('pages.log', Level::Warning));
+
     $pageController = new PageController();
+    // $pageController->log = $log;
     $pageController->dbc = $dbc;
     $pageController->template = new Template('admin/layout/default');
-    $pageController->runAction($action); 
+    $pageController->runAction($action);
 }
-

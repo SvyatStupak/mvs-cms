@@ -14,7 +14,6 @@ class User extends Entity
     protected function initFields()
     {
         $this->fields = [
-            'id',
             'name',
             'username',
             'password',

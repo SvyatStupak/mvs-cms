@@ -16,7 +16,6 @@ class Page extends Entity
     protected function initFields()
     {
         $this->fields = [
-            'id',
             'title',
             'content',
         ];
