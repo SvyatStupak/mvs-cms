@@ -4,22 +4,11 @@ session_start();
 use src\DataBaseConnection;
 use src\Router;
 use src\Template;
-use \modules\page\controllers\PageController;
-use \modules\contact\controllers\ContactController;
-
 
 define('ROOT_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
 define('VIEW_PATH', ROOT_PATH . 'view' . DIRECTORY_SEPARATOR);
 define('MODULE_PATH', ROOT_PATH . 'modules' . DIRECTORY_SEPARATOR);
 
-// include_once ROOT_PATH . 'src/Controller.php';
-// include_once ROOT_PATH . 'src/Template.php';
-// include_once ROOT_PATH . 'src/DataBaseConnection.php';
-// include_once ROOT_PATH . 'src/Entity.php';
-// include_once ROOT_PATH . 'src/Router.php';
-// include_once ROOT_PATH . 'src/Auth.php';
-// include_once MODULE_PATH . 'user/models/User.php';
-// include_once MODULE_PATH . 'page/models/Page.php';
 
 spl_autoload_register(function ($class_name) {
     $file = ROOT_PATH . str_replace('\\', '/', $class_name) . '.php';
