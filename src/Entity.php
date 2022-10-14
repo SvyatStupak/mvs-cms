@@ -66,7 +66,6 @@ abstract class Entity
 
     public function save()
     {
-        // $sql = "UPDATE pages SET title=:title, content=:content WHERE id=:id";
 
         $fieldBindings = [];
         $keysBinding = [];
@@ -92,6 +91,7 @@ abstract class Entity
         $stmt = $this->dbc->prepare($sql);
         $stmt->execute($preparedFields);
     }
+
 
     public function setValue($values, $object=null)
     {

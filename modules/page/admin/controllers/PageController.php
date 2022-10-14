@@ -2,7 +2,7 @@
 
 namespace modules\page\admin\controllers;
 
-use \src\Controller;
+use src\Controller;
 use modules\page\models\Page;
 
 
@@ -47,8 +47,6 @@ class PageController extends Controller
             $page->setValue($_POST);
 
             $page->save();
-
-            
 
             // $this->log->warning('Admin has chanded the page id: ' . $pageId);
         }

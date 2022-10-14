@@ -5,7 +5,7 @@ namespace modules\contact\controllers;
 use src\Controller;
 use modules\page\models\Page;
 
-class ContactController extends Controller
+class ContactController extends \src\Controller
 {
     public function runBeforeAction()
     {

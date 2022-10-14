@@ -2,10 +2,10 @@
 
 namespace modules\page\controllers;
 
-use \src\Controller;
+use src\Controller;
 use modules\page\models\Page;
 
-class PageController extends Controller
+class PageController extends \src\Controller
 {
     function defaultAction()
     {

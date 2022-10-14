@@ -4,7 +4,9 @@ session_start();
 use src\DataBaseConnection;
 use src\Router;
 use src\Template;
-use modules\page\admin\controllers\PageController;
+use \modules\page\controllers\PageController;
+use \modules\contact\controllers\ContactController;
+
 
 define('ROOT_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
 define('VIEW_PATH', ROOT_PATH . 'view' . DIRECTORY_SEPARATOR);
@@ -43,14 +45,10 @@ $router->findBy('pretty_url', $section);
 
 $action = $router->action !== '' ? $router->action : 'default';
 
-$nameController = ucfirst($router->module) . 'Controller';
+$nameController = '\modules\\' . $router->module . '\controllers\\' . ucfirst($router->module) . 'Controller';
 
-$controllerFile = MODULE_PATH . $router->module . '/controllers/' . $nameController . '.php';
-
-if(file_exists($controllerFile))
+if(class_exists($nameController))
 {
-    // include_once $controllerFile;
-
     $controller = new $nameController();
 
     $controller->dbc = $dbc;
